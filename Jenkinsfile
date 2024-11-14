@@ -39,6 +39,7 @@ pipeline {
                 }
             }
         }
+        /*
         stage('Deploy to Web Server') {
             steps {
                 // Usar credenciales SSH para conectarse al servidor web
@@ -82,5 +83,6 @@ pipeline {
                 ])
             }
         }
+        */
     }
 }
