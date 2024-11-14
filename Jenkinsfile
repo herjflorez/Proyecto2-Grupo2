@@ -25,7 +25,7 @@ pipeline {
                     sh '''
                         sonar-scanner \
                         -Dsonar.projectKey=testPipeLine \
-                        -Dsonar.sources=vulnerabilities \
+                        -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_HOST_URL} \
                         -Dsonar.token=${SONAR_AUTH_TOKEN} \
                         -Dsonar.php.version=8.0
