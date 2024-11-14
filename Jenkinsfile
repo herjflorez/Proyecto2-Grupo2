@@ -5,7 +5,7 @@ pipeline {
         // Nombre del servidor SonarQube configurado en Jenkins
         SONARQUBE_SERVER = 'SonarQube-p2g2'
         SONAR_HOST_URL = 'http://10.30.212.62:9000'
-        SONAR_AUTH_TOKEN = credentials('grupo2')
+        SONAR_AUTH_TOKEN = credentials('Grupo2')
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
     }
