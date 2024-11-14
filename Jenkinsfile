@@ -27,7 +27,7 @@ pipeline {
                         -Dsonar.projectKey=testPipeLine \
                         -Dsonar.sources=vulnerabilities \
                         -Dsonar.host.url=${SONAR_HOST_URL} \
-                        -Dsonar.login=${SONAR_AUTH_TOKEN} \
+                        -Dsonar.token=${SONAR_AUTH_TOKEN} \
                         -Dsonar.php.version=8.0
                     '''
                 }
