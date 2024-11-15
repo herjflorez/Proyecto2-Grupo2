@@ -61,6 +61,10 @@ pipeline {
                     sh '''
                      ssh root@10.30.212.58 
                     '''
+
+                    sh '''
+                    ls
+                    '''
                     
                     sh '''
                     docker rm -f zap_scan || true
