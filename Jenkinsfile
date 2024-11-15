@@ -63,7 +63,7 @@ pipeline {
                     '''
 
                     sh '''
-                    ls
+                    exit
                     '''
 
                     // Run OWASP ZAP container without mounting volumes and without '--rm'
