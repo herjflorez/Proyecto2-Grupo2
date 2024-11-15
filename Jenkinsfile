@@ -62,6 +62,10 @@ pipeline {
                     docker rm -f zap_scan || true
                     '''
 
+                    sh '''
+                    ls
+                    '''
+
                     // Run OWASP ZAP container without mounting volumes and without '--rm'
                     sh '''
                     docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable \
