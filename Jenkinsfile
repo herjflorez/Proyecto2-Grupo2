@@ -49,7 +49,7 @@ pipeline {
                 // Usar credenciales SSH para conectarse al servidor web
                 sshagent(['ClaveSSH']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no root@10.30.212.58 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
+                        ssh root@10.30.212.58 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
                     '''
                 }
             }
@@ -66,7 +66,7 @@ pipeline {
                     sh '''
                     docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable \
                     zap-baseline.py -t http://10.30.212.58 -P 80 \
-                    -r reporte_zap.html -I
+                    -r reporte_zap.html -I -d
                     '''
 
                     // Copy the report directly from the 'zap_scan' container to the Jenkins workspace
