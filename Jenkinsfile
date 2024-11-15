@@ -76,9 +76,10 @@ pipeline {
 
                     // Run OWASP ZAP container without mounting volumes and without '--rm'
                     sh '''
+                    ssh root@10.30.212.58 '
                     docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable \
                     zap-baseline.py -t http://10.30.212.58 -P 80 \
-                    -r reporte_zap.html -I -d
+                    -r reporte_zap.html -I -d'
                     '''
 
                     // Copy the report directly from the 'zap_scan' container to the Jenkins workspace
