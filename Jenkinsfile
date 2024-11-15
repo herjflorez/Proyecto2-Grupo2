@@ -49,7 +49,7 @@ pipeline {
                 // Usar credenciales SSH para conectarse al servidor web
                 sshagent(['ClaveSSH']) {
                     sh '''
-                        ssh u2g2@10.30.212.62 'cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
+                        ssh u2g2@10.30.212.58 'cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
                     '''
                 }
             }
@@ -65,7 +65,7 @@ pipeline {
                     // Run OWASP ZAP container without mounting volumes and without '--rm'
                     sh '''
                     docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable \
-                    zap-baseline.py -t http://10.30.212.62 -P 80 \
+                    zap-baseline.py -t http://10.30.212.58 -P 80 \
                     -r reporte_zap.html -I
                     '''
 
