@@ -62,8 +62,16 @@ pipeline {
                     docker rm -f zap_scan || true
                     '''
 
-                    sh '''
+                     sh '''
+                    ls
+                    '''
+
+                     sh '''
                     exit
+                    '''
+
+                    sh '''
+                    ls
                     '''
 
                     // Run OWASP ZAP container without mounting volumes and without '--rm'
