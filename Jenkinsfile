@@ -60,6 +60,7 @@ pipeline {
                     // Remove any existing container named 'zap_scan'
                     sh '''
                      ssh root@10.30.212.58 
+                     ls
                     '''
 
                     sh '''
