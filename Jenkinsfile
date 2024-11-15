@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy to Web Server') {
             steps {
                 // Usar credenciales SSH para conectarse al servidor web
-                sshagent(['webserver_ssh_credentials_id']) {
+                sshagent(['token']) {
                     sh '''
                         ssh u2g2@10.30.212.62 'cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
                     '''
