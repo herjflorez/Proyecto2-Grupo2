@@ -61,9 +61,10 @@ pipeline {
                     sh '''
                      ssh root@10.30.212.58 docker rm -f zap_scan || true
                      ssh root@10.30.212.58 docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.30.212.58 -P 80 -r reporte_zap.html -I -d
-                     
+                     ssh root@10.30.212.58 docker cp zap_scan:/zap/wrk/reporte_zap.html ./reporte_zap.html
+                     ssh root@10.30.212.58 docker rm zap_scan
                     '''
-
+/*
                     sh '''
                     ls
                     '''
@@ -88,6 +89,7 @@ pipeline {
                     sh '''
                     docker rm zap_scan
                     '''
+                    */
                 }
                 // Publicar el reporte de ZAP
                 publishHTML(target: [
