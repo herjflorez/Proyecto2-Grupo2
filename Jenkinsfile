@@ -34,7 +34,6 @@ pipeline {
             }
         }
 
-        /*
         stage('Quality Gate') {
             steps {
                 // Esperar el resultado del Quality Gate
@@ -88,6 +87,5 @@ pipeline {
                 ])
             }
         }
-        */
     }
 }
