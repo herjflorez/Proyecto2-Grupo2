@@ -47,7 +47,7 @@ pipeline {
                 // Usar credenciales SSH para conectarse al servidor web
                 sshagent(['ClaveSSH']) {
                     sh '''
-                        ssh root@10.30.212.43 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
+                        ssh -o StrictHostKeyChecking=no root@10.30.212.43 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
                     '''
                 }
             }
