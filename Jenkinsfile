@@ -59,7 +59,7 @@ pipeline {
                     sh '''
                      ssh root@10.30.212.43 docker rm -f zap_scan || true
                      ssh root@10.30.212.43 docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.30.212.43 -P 80 -r reporte_zap.html -I -d
-                     ssh root@10.30.212.43 docker cp zap_scan:/zap/wrk/reporte_zap.html /var/www/html/Proyecto2-Grupo2/reportes/reporte_zap.html
+                     ssh root@10.30.212.43 docker cp zap_scan:/zap/wrk/reporte_zap.html jenkins/var/jenkins_home/workspace/reporte_zap.html
                      ssh root@10.30.212.43 docker rm zap_scan
                     '''
                 }
