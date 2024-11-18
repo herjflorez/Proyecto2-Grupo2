@@ -60,16 +60,13 @@ pipeline {
                      ssh root@10.30.212.43 docker rm -f zap_scan || true
                      ssh root@10.30.212.43 docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.30.212.43 -P 80 -r reporte_zap.html -I -d
                      ssh root@10.30.212.43 docker cp zap_scan:/zap/wrk/reporte_zap.html /tmp/reporte_zap.html
-                     scp root@10.30.212.43:/tmp/reporte_zap.html ${WORKSPACE}/reporte_zap.html
+                     scp root@10.30.212.43:/tmp/reporte_zap.html ${env.WORKSPACE}/reporte_zap.html
                      ssh root@10.30.212.43 docker rm zap_scan
                     '''
                 }
                 // Publicar el reporte de ZAP
                 publishHTML(target: [
-                    reportDir: "${WORKSPACE}",
-                    sh '''
-                        ls
-                    '''
+                    reportDir: "${env.WORKSPACE}",
                     reportFiles: 'zap_report.html',
                     reportName: 'Reporte ZAP'
                 ])
