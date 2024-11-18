@@ -64,12 +64,11 @@ pipeline {
                      ssh root@10.30.212.43 docker rm zap_scan
                     '''
                 }
-                // Publicar el reporte de ZAP
-                publishHTML(target: [
-                    reportDir: "${env.WORKSPACE}",
-                    reportFiles: 'reporte_zap.html',
-                    reportName: 'Reporte ZAP'
-                ])
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'reporte_zap.html', fingerprint: true
+                }
             }
         }
     }
