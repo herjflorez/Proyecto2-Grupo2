@@ -66,7 +66,7 @@ pipeline {
                 }
                 // Publicar el reporte de ZAP
                 publishHTML(target: [
-                    reportDir: "${env.WORKSPACE}",
+                    reportDir: "${WORKSPACE}",
                     reportFiles: 'zap_report.html',
                     reportName: 'Reporte ZAP'
                 ])
