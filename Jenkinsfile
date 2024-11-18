@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Nombre del servidor SonarQube configurado en Jenkins
         SONARQUBE_SERVER = 'SonarQube-p2g2'
-        SONAR_HOST_URL = 'http://10.30.212.62:9000'
+        SONAR_HOST_URL = 'http://10.30.212.43:9000'
         SONAR_AUTH_TOKEN = credentials('Grupo2')
         // Agregar sonar-scanner al PATH
         PATH = "/opt/sonar-scanner/bin:${env.PATH}"
@@ -47,7 +47,7 @@ pipeline {
                 // Usar credenciales SSH para conectarse al servidor web
                 sshagent(['ClaveSSH']) {
                     sh '''
-                        ssh root@10.30.212.58 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
+                        ssh root@10.30.212.43 ' cd /var/www/html && git clone https://github.com/herjflorez/Proyecto2-Grupo2.git || (cd /var/www/html/Proyecto2-Grupo2 && git pull)'
                     '''
                 }
             }
@@ -57,37 +57,11 @@ pipeline {
                 sshagent(['ClaveSSH']) {
                     // Remove any existing container named 'zap_scan'
                     sh '''
-                     ssh root@10.30.212.58 docker rm -f zap_scan || true
-                     ssh root@10.30.212.58 docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.30.212.58 -P 80 -r reporte_zap.html -I -d
-                     ssh root@10.30.212.58 docker cp zap_scan:/zap/wrk/reporte_zap.html ./reporte_zap.html
-                     ssh root@10.30.212.58 docker rm zap_scan
+                     ssh root@10.30.212.43 docker rm -f zap_scan || true
+                     ssh root@10.30.212.43 docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://10.30.212.58 -P 80 -r reporte_zap.html -I -d
+                     ssh root@10.30.212.43 docker cp zap_scan:/zap/wrk/reporte_zap.html ./reporte_zap.html
+                     ssh root@10.30.212.43 docker rm zap_scan
                     '''
-/*
-                    sh '''
-                    ls
-                    '''
-                    
-                    sh '''
-                    docker rm -f zap_scan || true
-                    '''
-
-                    // Run OWASP ZAP container without mounting volumes and without '--rm'
-                    sh '''
-                    docker run --user root --name zap_scan -v zap_volume:/zap/wrk/ -t ghcr.io/zaproxy/zaproxy:stable \
-                    zap-baseline.py -t http://10.30.212.58 -P 80 \
-                    -r reporte_zap.html -I -d
-                    '''
-
-                    // Copy the report directly from the 'zap_scan' container to the Jenkins workspace
-                    sh '''
-                    docker cp zap_scan:/zap/wrk/reporte_zap.html ./reporte_zap.html
-                    '''
-
-                    // Remove the 'zap_scan' container
-                    sh '''
-                    docker rm zap_scan
-                    '''
-                    */
                 }
                 // Publicar el reporte de ZAP
                 publishHTML(target: [
