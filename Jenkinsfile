@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+https://github.com/herjflorez/Proyecto2-Grupo2/blob/main/Jenkinsfile
     environment {
         // Nombre del servidor SonarQube configurado en Jenkins
         SONARQUBE_SERVER = 'SonarQube-p2g2'
@@ -21,10 +21,10 @@ pipeline {
             steps {
                 // Configurar el entorno de SonarQube
                 withSonarQubeEnv("${SONARQUBE_SERVER}") {
-                    // Ejecutar el análisis con SonarScanner
+                    // Ejecutar el análisis con SonarScanner 
                     sh '''
                         sonar-scanner \
-                        -Dsonar.projectKey=testPipeLine \
+                        -Dsonar.projectKey=Proyecto2-Grupo2 \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_HOST_URL} \
                         -Dsonar.token=${SONAR_AUTH_TOKEN} \
@@ -33,15 +33,14 @@ pipeline {
                 }
             }
         }
-       /* stage('Quality Gate') {
+        stage('Quality Gate') {
             steps {
                 // Esperar el resultado del Quality Gate
                 timeout(time: 1, unit: 'HOURS') {
                     waitForQualityGate abortPipeline: true
                 }
             }
-        }*/
-        
+        }        
         stage('Deploy to Web Server') {
             steps {
                 // Usar credenciales SSH para conectarse al servidor web
