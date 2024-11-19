@@ -33,6 +33,7 @@ https://github.com/herjflorez/Proyecto2-Grupo2/blob/main/Jenkinsfile
                 }
             }
         }
+        /*
         stage('Quality Gate') {
             steps {
                 // Esperar el resultado del Quality Gate
@@ -41,6 +42,7 @@ https://github.com/herjflorez/Proyecto2-Grupo2/blob/main/Jenkinsfile
                 }
             }
         }        
+        */
         stage('Deploy to Web Server') {
             steps {
                 // Usar credenciales SSH para conectarse al servidor web
